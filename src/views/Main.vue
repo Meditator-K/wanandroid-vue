@@ -13,7 +13,6 @@
       >问答</router-link
     >
   </div>
-  
 </template>
 
 <script setup>
@@ -43,8 +42,5 @@ const route = useRoute();
 .tab-button.active {
   color: #007bff;
 }
-.view-container {
-  position: relative;
-  min-height: calc(100vh-60px);
-}
+
 </style>

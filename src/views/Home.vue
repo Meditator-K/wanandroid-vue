@@ -27,11 +27,14 @@
     <ArticleItem
       @click="openLink(item.link)"
       :title="item.title"
-      :author="item.author"
+      :author="item.author || item.shareUser"
       :chapterName="`${item.superChapterName}/${item.chapterName}`"
       :niceDate="item.niceDate"
     ></ArticleItem>
     <hr v-if="index < homeList.length - 1" width="100%" />
+  </div>
+  <div class="loading-indicator" v-if="loading">
+    加载中...
   </div>
 </template>
 
@@ -54,37 +57,48 @@ export default {
       index: 0,
       homeList: [],
       banners: [],
+      loading: false,
     };
   },
   mounted() {
     this.loadData();
     window.addEventListener("scroll", this.handleScroll);
   },
-  activated() {
-    this.loadData();
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     loadData() {
+      this.getBannerList();
+      this.getArticleList();
+    },
+    getBannerList() {
       getBanner().then((data) => {
-        console.log("banner列表：", data.data);
+        console.log("banner列表: ", data.data);
         this.banners = data.data;
       });
-      getHomeList(this.index).then((data) => {
-        console.log("首页列表：", data.data.datas);
-        this.homeList = data.data.datas;
-      });
+    },
+    getArticleList() {
+      getHomeList(this.index)
+        .then((data) => {
+          console.log("首页列表：", data.data.datas);
+          this.homeList = this.homeList.concat(data.data.datas);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     handleScroll() {
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      if (scrollTop + windowHeight >= documentHeight) {
+      if (scrollTop + windowHeight >= documentHeight - 100 && !this.loading) {
         this.index++;
-        getHomeList(this.index).then((data) => {
-          console.log("首页列表：", data.data.datas);
-          this.homeList = this.homeList.concat(data.data.datas);
-        });
+        this.loading = true;
+        setTimeout(() => {
+          this.getArticleList();
+        }, 500); // 延迟1秒加载更多数据，可根据实际情况调整延迟时间
       }
     },
     openLink(url) {
@@ -137,4 +151,11 @@ export default {
 img:hover {
   cursor: pointer;
 }
+.loading-indicator {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
 </style>
