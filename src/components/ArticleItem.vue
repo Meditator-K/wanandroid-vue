@@ -40,6 +40,7 @@ export default {
   margin: 10px 0 0 0;
 }
 .article-item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

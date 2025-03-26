@@ -1,6 +1,6 @@
 <template>
   <div class="swiper-container">
-    <div class="swiper-bg">
+    <!-- <div class="swiper-bg"> -->
       <swiper
         :modules="modules"
         :slides-per-view="1"
@@ -20,8 +20,8 @@
 
         <div class="swiper-pagination"></div>
       </swiper>
-    </div>
-    <div class="swiper-back"></div>
+    <!-- </div> -->
+    <!-- <div class="swiper-back"></div> -->
   </div>
   <div class="article-list" v-for="(item, index) in homeList" :key="index">
     <ArticleItem
@@ -110,9 +110,10 @@ export default {
 
 <style scoped>
 .swiper-container {
-  width: 100%;
+  width: 60vw;
   height: 400px;
   position: relative;
+  margin-top: 50px;
 }
 .swiper-image {
   width: 100%;
