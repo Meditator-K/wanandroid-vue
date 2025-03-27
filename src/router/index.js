@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import QA from '../views/QA.vue';
+import Navigation from '../views/Navigation.vue';
 
 const routes = [
     {
@@ -14,6 +15,12 @@ const routes = [
         path: '/qa',
         name: 'qa',
         component: QA,
+        meta: { keepAlive: true }
+    },
+    {
+        path: '/navi',
+        name: 'navi',
+        component: Navigation,
         meta: { keepAlive: true }
     }
 ];

@@ -90,6 +90,7 @@ export default {
 .fullscreen-load {
   position: relative;
   margin-top: 50px;
+  margin-left: 14px;
   width: 60vw;
   height: 100vh;
 }

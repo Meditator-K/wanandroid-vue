@@ -114,6 +114,7 @@ export default {
   height: 400px;
   position: relative;
   margin-top: 50px;
+  margin-left: 14px;
 }
 .swiper-image {
   width: 100%;

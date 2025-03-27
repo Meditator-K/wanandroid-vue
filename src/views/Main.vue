@@ -12,6 +12,12 @@
       :class="{ active: route.name === 'qa' }"
       >问答</router-link
     >
+    <router-link
+      to="/navi"
+      class="tab-button"
+      :class="{ active: route.name === 'navi' }"
+      >导航</router-link
+    >
   </div>
 </template>
 

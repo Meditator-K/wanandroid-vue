@@ -11,3 +11,7 @@ export function getQAList(index) {
 export function getBanner() {
     return get("/api/banner/json", {});
 }
+
+export function getNavi() {
+    return get("/api/navi/json", {});
+}
