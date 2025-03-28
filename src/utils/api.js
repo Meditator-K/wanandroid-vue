@@ -15,3 +15,7 @@ export function getBanner() {
 export function getNavi() {
     return get("/api/navi/json", {});
 }
+
+export function getMainProjectList(index) {
+    return get(`/api/project/list/${index}/json?cid=294`, {});
+}

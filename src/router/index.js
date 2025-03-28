@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import QA from '../views/QA.vue';
 import Navigation from '../views/Navigation.vue';
+import Project from '../views/Project.vue';
 
 const routes = [
     {
@@ -21,6 +22,12 @@ const routes = [
         path: '/navi',
         name: 'navi',
         component: Navigation,
+        meta: { keepAlive: true }
+    },
+    {
+        path: '/project',
+        name: 'project',
+        component: Project,
         meta: { keepAlive: true }
     }
 ];

@@ -18,6 +18,12 @@
       :class="{ active: route.name === 'navi' }"
       >导航</router-link
     >
+    <router-link
+      to="/project"
+      class="tab-button"
+      :class="{ active: route.name === 'project' }"
+      >项目</router-link
+    >
   </div>
 </template>
 
@@ -34,7 +40,7 @@ const route = useRoute();
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 20vw;
   right: 20vw;

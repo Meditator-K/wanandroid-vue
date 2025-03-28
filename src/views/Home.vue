@@ -149,6 +149,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  margin-left: 14px;
 }
 img:hover {
   cursor: pointer;
