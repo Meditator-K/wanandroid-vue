@@ -1,6 +1,6 @@
 <template>
   <div class="item-container">
-    <img :src="item.envelopePic" class="img-container" />
+    <img :src="item.envelopePic" class="img-box" />
     <div class="right-container">
       <div class="title" @click="openLink(item.link)">{{ item.title }}</div>
       <div class="desc">{{ item.desc }}</div>
@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .item-container {
   border: 1px solid #ccc;
   padding: 10px;
@@ -35,10 +35,11 @@ export default {
   flex-direction: row;
   gap: 10px;
 }
-.img-container {
+.img-box {
   width: 120px;
   height: 200px;
-  object-fit: fill;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 .right-container {
   width: 100%;
@@ -48,7 +49,7 @@ export default {
   align-items: flex-start;
 }
 .title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: black;
   display: -webkit-box;
@@ -62,12 +63,13 @@ export default {
   text-decoration: underline;
 }
 .desc {
-  font-size: 15px;
+  font-size: 14px;
   color: #666;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-align: start;
 }
 .bottom {
   width: 100%;

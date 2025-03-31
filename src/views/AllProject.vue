@@ -2,8 +2,12 @@
   <div class="project-container">
     <div class="left-container">
       <div v-for="(item, index) in projectTree" :key="index" class="name-item">
-        <div class="name-text">
-          {{ item.name }}
+        <div
+          class="name-text"
+          :class="{ 'active-text': cid == item.id }"
+          @click="onMenuClick(item.id)"
+        >
+          {{ formatTitle(item.name) }}
         </div>
         <hr v-if="index < projectTree.length - 1" class="line" />
       </div>
@@ -21,6 +25,7 @@
 <script>
 import AllProjectItem from "../components/AllProjectItem.vue";
 import { getProjectTree, getProjectList } from "../utils/api.js";
+import he from "he";
 export default {
   components: {
     AllProjectItem,
@@ -35,6 +40,7 @@ export default {
     };
   },
   created() {
+    console.log("路由参数", this.$route.params.id); // 打印路由参数以进行调试
     this.cid = this.$route.params.id;
   },
   mounted() {
@@ -52,17 +58,24 @@ export default {
       getProjectList(this.index, this.cid)
         .then((res) => {
           console.log("项目列表：", res.data.datas);
-          this.projectList = this.projectList.concat(res.data.datas);
+          this.projectList = res.data.datas;
         })
         .finally(() => {
           this.loading = false;
         });
     },
+    onMenuClick(id) {
+      this.cid = id;
+      this.getProjList();
+    },
+    formatTitle(title) {
+      return he.decode(title);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .project-container {
   width: 60vw;
   display: flex;
@@ -86,8 +99,10 @@ export default {
   color: black;
   padding: 5px;
   text-align: center;
+  transition: color 0.3s;
 }
-.name-text:hover {
+.name-text:hover,
+.name-text.active-text {
   color: rgb(79, 79, 231);
   cursor: pointer;
 }
@@ -102,6 +117,7 @@ export default {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
 }
 </style>

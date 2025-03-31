@@ -31,7 +31,7 @@ const routes = [
         meta: { keepAlive: true }
     },
     {
-        path:'/allProject',
+        path:'/allProject/:id',
         name:'allProject',
         component:()=>import('../views/AllProject.vue'),
     }

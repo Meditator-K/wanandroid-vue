@@ -27,7 +27,7 @@ export default {
       window.open(url, "_blank");
     },
     showProjectList(id) {
-      this.$router.push({ name: "allProject", params: { id } });
+      this.$router.push(`/allProject/${id}`);
     },
   },
 };
