@@ -29,6 +29,11 @@ const routes = [
         name: 'project',
         component: Project,
         meta: { keepAlive: true }
+    },
+    {
+        path:'/allProject',
+        name:'allProject',
+        component:()=>import('../views/AllProject.vue'),
     }
 ];
 

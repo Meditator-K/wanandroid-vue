@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getMainProjectList } from "../utils/api";
+import { getProjectList } from "../utils/api";
 import ProjectItem from "../components/ProjectItem.vue";
 export default {
   components: {
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getProjList() {
-      getMainProjectList(this.index)
+      getProjectList(this.index)
         .then((res) => {
           console.log("项目列表：", res.data.datas);
           this.projectList = this.projectList.concat(res.data.datas);

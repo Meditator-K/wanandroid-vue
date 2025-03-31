@@ -16,6 +16,10 @@ export function getNavi() {
     return get("/api/navi/json", {});
 }
 
-export function getMainProjectList(index) {
-    return get(`/api/project/list/${index}/json?cid=294`, {});
+export function getProjectList(index, cid = 294) {
+    return get(`/api/project/list/${index}/json?cid=${cid}`, {});
+}
+
+export function getProjectTree() {
+    return get("/api/project/tree/json", {});
 }
