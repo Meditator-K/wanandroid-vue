@@ -16,8 +16,8 @@ export function getNavi() {
     return get("/api/navi/json", {});
 }
 
-export function getProjectList(index, cid = 294) {
-    return get(`/api/project/list/${index}/json?cid=${cid}`, {});
+export function getProjectList(index, cid = 294, page_size = 15) {
+    return get(`/api/project/list/${index}/json?cid=${cid}&page_size=${page_size}`, {});
 }
 
 export function getProjectTree() {

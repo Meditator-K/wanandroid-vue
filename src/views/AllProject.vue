@@ -13,11 +13,23 @@
       </div>
     </div>
     <div class="right-container">
-      <AllProjectItem
-        v-for="(item, index) in projectList"
-        :key="index"
-        :item="item"
-      />
+      <div class="wrap-container">
+        <AllProjectItem
+          v-for="(item, index) in projectList"
+          :key="index"
+          :item="item"
+        />
+      </div>
+      <div class="pagination-container">
+        <el-pagination
+          v-if="total > 0"
+          :current-page="index"
+          :page-size="pageSize"
+          :total="total"
+          layout="prev, pager, next"
+          @current-change="handlePageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -33,9 +45,10 @@ export default {
   data() {
     return {
       projectTree: [],
-      index: 0,
+      index: 1,
+      total: 0,
+      pageSize: 8,
       projectList: [],
-      loading: false,
       cid: 0,
     };
   },
@@ -55,21 +68,27 @@ export default {
       });
     },
     getProjList() {
-      getProjectList(this.index, this.cid)
-        .then((res) => {
-          console.log("项目列表：", res.data.datas);
-          this.projectList = res.data.datas;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      getProjectList(this.index, this.cid, this.pageSize).then((res) => {
+        console.log("项目列表：", res.data.datas);
+        this.projectList = res.data.datas;
+        this.total = res.data.total;
+      });
     },
     onMenuClick(id) {
+      if (this.cid === id) {
+        return;
+      }
+      this.index = 1;
       this.cid = id;
       this.getProjList();
     },
     formatTitle(title) {
       return he.decode(title);
+    },
+    handlePageChange(page) {
+      console.log("当前页码：", page);
+      this.index = page;
+      this.getProjList();
     },
   },
 };
@@ -116,8 +135,25 @@ export default {
 .right-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrap-container {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 15px;
+}
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+:deep(.el-pagination) {
+  padding: 0;
 }
 </style>
