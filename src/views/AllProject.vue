@@ -26,9 +26,13 @@
           :current-page="index"
           :page-size="pageSize"
           :total="total"
-          layout="prev, pager, next"
+          :background="true"
+          :hide-on-single-page="true"
+          layout="prev, pager, next , ->, slot"
           @current-change="handlePageChange"
-        />
+        >
+          <span class="custom-total">共 {{ total }} 条</span>
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -155,5 +159,36 @@ export default {
 }
 :deep(.el-pagination) {
   padding: 0;
+}
+/* 修改页码按钮样式 */
+:deep(.el-pagination.is-background .btn-prev),
+:deep(.el-pagination.is-background .btn-next),
+:deep(.el-pagination.is-background .el-pager li) {
+  background-color: #f4f4f5;
+  color: #606266;
+  min-width: 32px;
+  border-radius: 4px;
+}
+/* 当前选中页码样式 */
+:deep(.el-pagination.is-background .el-pager li.is-active) {
+  background-color: #409eff;
+  color: white;
+}
+/* 禁用按钮样式 */
+:deep(.el-pagination.is-background .btn-prev:disabled),
+:deep(.el-pagination.is-background .btn-next:disabled) {
+  color: #c0c4cc;
+  background-color: #f4f4f5;
+}
+/* 悬停效果 */
+:deep(.el-pagination.is-background .btn-prev:not(:disabled):hover),
+:deep(.el-pagination.is-background .btn-next:not(:disabled):hover),
+:deep(.el-pagination.is-background .el-pager li:not(.is-active):hover) {
+  color: #409eff;
+}
+:deep(.custom-total) {
+  font-size: 14px;
+  color: #606266;
+  margin-left: 10px;
 }
 </style>
