@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import QA from '../views/QA.vue';
 import Navigation from '../views/Navigation.vue';
 import Project from '../views/Project.vue';
+import Tool from '../views/Tool.vue';
 
 const routes = [
     {
@@ -31,9 +32,15 @@ const routes = [
         meta: { keepAlive: true }
     },
     {
-        path:'/allProject/:id',
-        name:'allProject',
-        component:()=>import('../views/AllProject.vue'),
+        path: '/allProject/:id',
+        name: 'allProject',
+        component: () => import('../views/AllProject.vue'),
+    },
+    {
+        path: '/tool',
+        name: 'tool',
+        component: Tool,
+        meta: { keepAlive: true }
     }
 ];
 

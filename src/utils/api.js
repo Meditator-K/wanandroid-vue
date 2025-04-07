@@ -23,3 +23,7 @@ export function getProjectList(index, cid = 294, page_size = 15) {
 export function getProjectTree() {
     return get("/api/project/tree/json", {});
 }
+
+export function getToolList(){
+    return get("/api/tools/list/json", {});
+}

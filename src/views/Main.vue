@@ -24,6 +24,12 @@
       :class="{ active: route.name === 'project' }"
       >项目</router-link
     >
+    <router-link
+      to="/tool"
+      class="tab-button"
+      :class="{ active: route.name === 'tool' }"
+      >工具</router-link
+    >
   </div>
 </template>
 
