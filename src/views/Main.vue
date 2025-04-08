@@ -42,30 +42,22 @@ const route = useRoute();
 .tabs {
   width: 60vw;
   display: flex;
-  padding: 10px 0;
+  flex-direction: row;
+  padding: 15px 20vw;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  position: absolute;
+  position: fixed;
+  justify-content: space-between;
   top: 0;
-  left: 20vw;
-  right: 20vw;
-  margin-bottom: 10px;
-  /* transform: translateZ(0); */
+  left: 0;
 }
 .tab-button {
-  padding: 10px 25px;
-  /* border-radius: 10px; */
-  /* text-decoration: none; */
   color: #666;
   transition: all 0.3s;
 }
 .tab-button.active {
   color: #007bff;
 }
-:deep(.view-container) {
-  position: relative;
-  min-height: 100vh;
-  overflow-y: auto;
-}
 </style>
+ 

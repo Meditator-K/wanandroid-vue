@@ -1,11 +1,11 @@
 <template>
   <div @click="handleClidk" class="article-item">
     <h4 class="title">{{ convertedTitle() }}</h4>
-    <div>
+    <span>
       作者：{{ author }}&nbsp;&nbsp;分类：{{ chapterName }}&nbsp;&nbsp;时间：{{
         niceDate
       }}
-    </div>
+    </span>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
 <style scoped>
 .title {
   padding: 0;
-  margin: 10px 0 0 0;
+  margin: 0;
 }
 .article-item {
   width: 100%;

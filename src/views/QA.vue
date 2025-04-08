@@ -1,9 +1,10 @@
 <template>
-  <!-- <div v-if="initLoad" class="fullscreen-load"></div>
-  <template v-else> -->
-  <div class="fullscreen-load">
-
-    <div class="question" v-for="(item, index) in questionList" :key="index">
+  <div class="view-container">
+    <div
+      class="list-container"
+      v-for="(item, index) in questionList"
+      :key="index"
+    >
       <ArticleItem
         @click="openLink(item.link)"
         :title="item.title"
@@ -15,8 +16,6 @@
     </div>
     <div class="loading-indicator" v-if="loading">加载中...</div>
   </div>
-
-  <!-- </template> -->
 </template>
 
 <script>
@@ -74,24 +73,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.question {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-.loading-indicator {
-  padding: 20px;
-  text-align: center;
-  color: #666;
-  font-size: 14px;
-}
-.fullscreen-load {
-  position: relative;
-  margin-top: 50px;
-  margin-left: 14px;
-  width: 60vw;
-  height: 100vh;
-}
-</style>
+<style scoped></style>

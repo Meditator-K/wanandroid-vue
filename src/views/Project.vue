@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="view-container">
     <div
       v-for="(item, index) in projectList"
       :key="index"
@@ -61,31 +61,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  width: 60vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 50px;
-  margin-left: 14px;
-}
-.list-container {
-  display: flex;
-  flex-direction: column;
-}
-.line {
-  width: 100%;
-  height: 1px;
-  background-color: #ccc;
-  border: none;
-  margin: 10px 0;
-}
-.loading-indicator {
-  padding: 20px;
-  text-align: center;
-  color: #666;
-  font-size: 14px;
-}
-</style>
+<style scoped></style>

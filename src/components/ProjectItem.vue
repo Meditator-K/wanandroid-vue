@@ -35,8 +35,10 @@ export default {
 
 <style scoped>
 .item-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 20px;
 }
 .left-container {

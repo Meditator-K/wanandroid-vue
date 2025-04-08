@@ -1,9 +1,9 @@
 <template>
-  <div class="project-container">
-    <div class="left-container">
-      <div v-for="(item, index) in projectTree" :key="index" class="name-item">
+  <div class="row-view-container">
+    <div class="menu-container">
+      <div v-for="(item, index) in projectTree" :key="index" class="menu-item">
         <div
-          class="name-text"
+          class="menu-text"
           :class="{ 'active-text': cid == item.id }"
           @click="onMenuClick(item.id)"
         >
@@ -99,43 +99,6 @@ export default {
 </script>
 
 <style scoped>
-.project-container {
-  width: 60vw;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 50px;
-  margin-left: 14px;
-}
-.left-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid #ccc;
-}
-.name-item {
-  display: flex;
-  flex-direction: column;
-}
-.name-text {
-  font-size: 14px;
-  color: black;
-  padding: 5px;
-  text-align: center;
-  transition: color 0.3s;
-}
-.name-text:hover,
-.name-text.active-text {
-  color: rgb(79, 79, 231);
-  cursor: pointer;
-}
-.line {
-  width: 100%;
-  height: 1px;
-  background-color: #ccc;
-  border: none;
-  margin: 0;
-}
 .right-container {
   width: 100%;
   height: 100%;
