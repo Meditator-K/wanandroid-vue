@@ -24,6 +24,10 @@ export function getProjectTree() {
     return get("/api/project/tree/json", {});
 }
 
-export function getToolList(){
+export function getToolList() {
     return get("/api/tools/list/json", {});
+}
+
+export function search(index, keyword) {
+    return post(`/api/article/query/${index}/json?k=${keyword}`, {});
 }

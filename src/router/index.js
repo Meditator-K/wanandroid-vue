@@ -41,7 +41,12 @@ const routes = [
         name: 'tool',
         component: Tool,
         meta: { keepAlive: true }
-    }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: () => import('../views/Search.vue'),
+    },
 ];
 
 const router = createRouter({

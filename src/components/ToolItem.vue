@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { getAssetUrl } from "../utils/assetUtils";
 export default {
   name: "ToolItem",
   props: {
@@ -19,7 +20,7 @@ export default {
   },
   methods: {
     getIconUrl(icon) {
-      return new URL(`../assets/${icon}`, import.meta.url).href;
+      return getAssetUrl(icon);
     },
     openUrl(url) {
       window.open(url, "_blank");
@@ -36,13 +37,13 @@ export default {
   gap: 10px;
   align-items: center;
   justify-content: start;
-  background: #f5f4f4a4;
+  background: white;
   border: 1px solid transparent;
   border-radius: 4px;
   transition: border-color 0.3s ease;
 }
 .item-container:hover {
-  border-color:rgb(54, 54, 235);
+  border-color: rgb(54, 54, 235);
   cursor: pointer;
 }
 .img-container {
