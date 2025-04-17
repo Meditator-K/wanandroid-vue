@@ -31,3 +31,7 @@ export function getToolList() {
 export function search(index, keyword) {
     return post(`/api/article/query/${index}/json?k=${keyword}`, {});
 }
+
+export function getHotkey(){
+    return get("/api/hotkey/json", {});
+}

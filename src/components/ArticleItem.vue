@@ -1,6 +1,6 @@
 <template>
   <div @click="handleClidk" class="article-item">
-    <h4 class="title">{{ convertedTitle() }}</h4>
+    <div class="title" v-html="convertedTitle()"></div>
     <span>
       作者：{{ author }}&nbsp;&nbsp;分类：{{ chapterName }}&nbsp;&nbsp;时间：{{
         niceDate
@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import he from 'he';
+import he from "he";
+import DOMPurify from "dompurify";
 export default {
   props: {
     title: String,
@@ -24,10 +25,11 @@ export default {
       emit("click");
     };
     const convertedTitle = () => {
-      // const tempDiv = document.createElement('div');
-      // tempDiv.innerHTML = props.title;
-      // return tempDiv.textContent || tempDiv.innerText || '';
-      return he.decode(props.title);
+      const decode = he.decode(props.title);
+      return DOMPurify.sanitize(decode, {
+        ALLOWED_TAGS: ["em"],
+        ALLOWED_ATTR: ["class"],
+      });
     };
     return { handleClidk, convertedTitle };
   },
@@ -36,8 +38,9 @@ export default {
 
 <style scoped>
 .title {
-  padding: 0;
-  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: start;
 }
 .article-item {
   width: 100%;
@@ -50,5 +53,14 @@ div:hover {
   color: rgb(79, 79, 231);
   text-decoration: underline;
   cursor: pointer;
+}
+
+</style>
+<style>
+em.highlight {
+  color: #da5111;
+  font-style: normal;
+  padding: 0 2px;
+  border-radius: 2px;
 }
 </style>

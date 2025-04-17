@@ -31,15 +31,26 @@
       :class="{ active: route.name === 'tool' }"
       >工具</router-link
     >
-    <div class="search-container">
+    <div class="search-container" ref="searchContainer">
       <input
         type="text"
         class="search-input"
         placeholder="请输入关键字..."
         v-model="searchText"
         @keyup.enter="handleSearch"
+        @click="showPopup = true"
       />
       <button class="search-button" @click="handleSearch">搜索</button>
+      <div v-if="showPopup" class="search-popup">
+        <div
+          class="keyword-item"
+          v-for="(item, index) in hotkeyList"
+          :key="index"
+          @click="selectKeyword(item.name)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,10 +59,14 @@
 import { useRoute, useRouter } from "vue-router";
 import { onMounted, onUnmounted, ref } from "vue";
 import { getAssetUrl } from "../utils/assetUtils";
+import { getHotkey } from "../utils/api";
 const route = useRoute();
 const router = useRouter();
 const isScrolled = ref(false);
 const searchText = ref("");
+const hotkeyList = ref([]);
+const showPopup = ref(false);
+const searchContainer = ref(null);
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
@@ -61,8 +76,25 @@ const handleSearch = () => {
   if (searchText.value.trim()) {
     router.push({
       path: "/search",
-      query: { keyword: searchText.value.trim() },
+      query: { keyword: searchText.value.trim(), t: Date.now() },
     });
+  }
+};
+
+const getHotkeyList = () => {
+  getHotkey().then((res) => {
+    hotkeyList.value = res.data;
+    console.log("关键字", hotkeyList.value);
+  });
+};
+
+const selectKeyword = (keyword) => {
+  searchText.value = keyword;
+  showPopup.value = false;
+};
+const handleClickOutside = (event) => {
+  if (searchContainer.value && !searchContainer.value.contains(event.target)) {
+    showPopup.value = false;
   }
 };
 
@@ -70,10 +102,13 @@ const logoUrl = getAssetUrl("logo.png");
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  document.addEventListener("click", handleClickOutside);
+  getHotkeyList();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
 
@@ -121,8 +156,33 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   margin-left: 50px;
+  position: relative;
 }
-
+.search-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  /* overflow-y: auto; */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+.keyword-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+.keyword-item:hover {
+  background-color: #f5f5f5;
+}
 .search-input {
   padding: 8px 12px;
   border: 1px solid #ddd;
